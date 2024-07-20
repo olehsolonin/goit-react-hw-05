@@ -1,0 +1,13 @@
+.container {
+	padding: 0 15px;
+}
+
+.link {
+	text-decoration: none;
+	color: black;
+	margin-bottom: 50px;
+}
+
+.active {
+	color: orangered;
+}
