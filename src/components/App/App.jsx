@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import Navigation from '../Navigation/Navigation';
 import HomePage from '../../pages/HomePage/HomePage';
 import MoviesPage from '../../pages/MoviesPage/MoviesPage';
-import ProfilePage from '../../pages/ProfilePage';
 import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
 
 const makeNavLinkClass = ({ isActive }) => {
