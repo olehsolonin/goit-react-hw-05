@@ -7,6 +7,8 @@ import HomePage from '../../pages/HomePage/HomePage';
 import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import MovieCast from '../MovieCast/MovieCast';
+import MovieReviews from '../MovieReviews/MovieReviews';
 
 const makeNavLinkClass = ({ isActive }) => {
   //   console.log(isActive);
@@ -22,8 +24,8 @@ export default function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/movies" element={<MoviesPage />}></Route>
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="Cast" element={}></Route>
-          <Route path="Reviews" element={}></Route>
+          <Route path="Cast" element={<MovieCast />}></Route>
+          <Route path="Reviews" element={<MovieReviews />}></Route>
         </Route>
         <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>

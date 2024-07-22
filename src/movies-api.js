@@ -29,12 +29,23 @@ export const getMovies = async () => {
 	return response.data.results;
 };
 
-getMovies()
-	.then(response => console.log(response))
-	.catch(error => console.log(error));
+// getMovies()
+// 	.then(response => console.log(response))
+// 	.catch(error => console.log(error));
 
 
 export const getMoviesById = async (movieId) => {
 	const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`);
 	return response.data;
+};
+
+export const getMovieCastById = async (movieId) => {
+	const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`);
+	return response.data;
+};
+
+export const getMovieReviews = async (movieId) => {
+	const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`);
+	// console.log(response.data.results);
+	return response.data.results;
 };

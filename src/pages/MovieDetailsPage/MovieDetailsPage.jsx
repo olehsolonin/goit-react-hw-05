@@ -1,11 +1,11 @@
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { myApiKey, getMoviesById } from '../../movies-api';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  console.log(movieId);
+  //   console.log(movieId);
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
 
@@ -15,7 +15,7 @@ export default function MovieDetailsPage() {
         myApiKey;
         axios.defaults.headers.common['Authorization'] = `Bearer ${myApiKey}`;
         const res = await getMoviesById(movieId);
-        console.log(typeof res);
+        //   console.log(typeof res);
         setMovie(res);
         setGenres(res.genres);
       } catch (error) {
@@ -54,6 +54,7 @@ export default function MovieDetailsPage() {
           <NavLink to="Reviews">Reviews</NavLink>
         </li>
       </ul>
+      <Outlet />
     </div>
   );
 }
