@@ -16,12 +16,12 @@ export default function Navigation() {
         <NavLink to="/" className={makeNavLinkClass}>
           Home
         </NavLink>
-        <NavLink to="/MoviesPage" className={makeNavLinkClass}>
+        <NavLink to="/movies" className={makeNavLinkClass}>
           Movies
         </NavLink>
-        <NavLink to="/MovieDetailsPage" className={makeNavLinkClass}>
+        {/* <NavLink to="/movies/:movieId" className={makeNavLinkClass}>
           Movie Details
-        </NavLink>
+        </NavLink> */}
       </nav>
     </header>
   );

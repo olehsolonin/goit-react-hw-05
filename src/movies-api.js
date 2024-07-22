@@ -24,7 +24,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${myApiKey}`;
 // };
 
 export const getMovies = async () => {
-	const response = await axios.get("https://api.themoviedb.org/3/search/movie?query=Superman");
+	const response = await axios.get(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`);
 
 	return response.data.results;
 };
@@ -32,3 +32,9 @@ export const getMovies = async () => {
 getMovies()
 	.then(response => console.log(response))
 	.catch(error => console.log(error));
+
+
+export const getMoviesById = async (movieId) => {
+	const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`);
+	return response.data;
+};

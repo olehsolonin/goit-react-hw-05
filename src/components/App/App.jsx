@@ -6,6 +6,7 @@ import Navigation from '../Navigation/Navigation';
 import HomePage from '../../pages/HomePage/HomePage';
 import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 const makeNavLinkClass = ({ isActive }) => {
   //   console.log(isActive);
@@ -20,7 +21,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/movies" element={<MoviesPage />}></Route>
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}></Route>
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="Cast" element={}></Route>
+          <Route path="Reviews" element={}></Route>
+        </Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
     </div>
   );
