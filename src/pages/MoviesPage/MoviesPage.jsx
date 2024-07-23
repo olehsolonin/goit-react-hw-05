@@ -44,7 +44,7 @@ export default function MoviesPage() {
 
   return (
     <div>
-      <h1>Movies:{query}</h1>
+      <h1>Movies:{searchParams.get('query')}</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="query" />
         <button type="submit">Search</button>

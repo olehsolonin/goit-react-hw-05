@@ -1,5 +1,11 @@
-import { useParams, NavLink, Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {
+  useParams,
+  NavLink,
+  Link,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { myApiKey, getMoviesById } from '../../movies-api';
 
@@ -8,6 +14,7 @@ export default function MovieDetailsPage() {
   //   console.log(movieId);
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -32,8 +39,11 @@ export default function MovieDetailsPage() {
     return genres.map(genre => <p key={genre.id}>{genre.name}</p>);
   };
 
+  const backLinkURL = useRef(location.state?.from ?? '/movies');
+
   return (
     <div>
+      <Link to={backLinkURL.current}>Go Back</Link>
       <h1>
         {movie.original_title}({movie.release_date})
       </h1>
