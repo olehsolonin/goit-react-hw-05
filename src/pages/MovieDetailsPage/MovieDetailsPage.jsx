@@ -8,27 +8,37 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { myApiKey, getMoviesById } from '../../movies-api';
+import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   //   console.log(movieId);
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const getMovieDetails = async () => {
       try {
+        setLoading(true);
+        setError(false);
         myApiKey;
         axios.defaults.headers.common['Authorization'] = `Bearer ${myApiKey}`;
         const res = await getMoviesById(movieId);
         //   console.log(typeof res);
         setMovie(res);
         setGenres(res.genres);
+        setLoading(false);
+        toast.success('The request is successful)');
       } catch (error) {
-        console.log(
-          `Sorry bro, we didn't find anything matching your request: ${error}`
-        );
+        toast.error(`Ooops, some ${error}`);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -55,6 +65,9 @@ export default function MovieDetailsPage() {
       <p>User Score: {movie.vote_average * 10}%</p>
       <h2>Overview:</h2>
       <p>{movie.overview}</p>
+      {loading && <Loader />}
+      {error && <ErrorMessage />}
+      <Toaster />
       <div>{renderGenres(genres)}</div>
       <ul>
         <li>

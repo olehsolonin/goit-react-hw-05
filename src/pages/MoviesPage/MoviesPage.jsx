@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 import { getMovieByRequest, myApiKey } from '../../movies-api';
 import MovieList from '../../components/MovieList/MovieList';
 import axios from 'axios';
