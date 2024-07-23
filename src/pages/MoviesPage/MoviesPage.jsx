@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovieByRequest, myApiKey } from '../../movies-api';
+import MovieList from '../../components/MovieList/MovieList';
 import axios from 'axios';
 
 export default function MoviesPage() {
   const [query, setQuery] = useState('');
   const [data, setData] = useState({});
-  //   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  //   console.log(searchParams.get('query'));
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -14,26 +17,22 @@ export default function MoviesPage() {
     console.log(clearQuery);
     if (clearQuery) {
       setQuery(clearQuery);
-      // setSearchParams({ params: clearQuery });
-      // console.log(searchParams);
+      setSearchParams({ query: clearQuery });
     }
-    //  event.target.reset();
+    event.target.reset();
   };
 
   useEffect(() => {
-    //  const queryParam = searchParams.get('params');
-    //  if (queryParam) {
-    //    // setQuery(queryParam);
-    //    console.log(searchParams);
-    //  }
-
     const getMovieSearch = async () => {
-      if (query === '') return;
+      const queryParam = searchParams.get('query');
+
+      if (queryParam === '' || queryParam === null) return;
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${myApiKey}`;
-        const res = await getMovieByRequest(query);
+        const res = await getMovieByRequest(queryParam);
         setData(res);
         console.log(res);
+        console.log(queryParam);
       } catch (error) {
         console.log(
           `Sorry bro, we didn't find anything matching your request: ${error}`
@@ -41,7 +40,7 @@ export default function MoviesPage() {
       }
     };
     getMovieSearch();
-  }, [query]);
+  }, [query, searchParams]);
 
   return (
     <div>
@@ -50,6 +49,7 @@ export default function MoviesPage() {
         <input type="text" name="query" />
         <button type="submit">Search</button>
       </form>
+      {data.length > 0 && <MovieList movies={data} />}
     </div>
   );
 }

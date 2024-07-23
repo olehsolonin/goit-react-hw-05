@@ -52,6 +52,6 @@ export const getMovieReviews = async (movieId) => {
 
 export const getMovieByRequest = async (movieName) => {
 	const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${movieName}`);
-	console.log(response.data);
-	return response.data;
+	console.log(response.data.results);
+	return response.data.results;
 };
