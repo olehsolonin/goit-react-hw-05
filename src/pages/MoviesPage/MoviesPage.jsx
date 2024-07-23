@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function MoviesPage() {
   const [query, setQuery] = useState('');
   const [data, setData] = useState({});
-  const [searchParams, setSearchParams] = useSearchParams();
+  //   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -14,24 +14,24 @@ export default function MoviesPage() {
     console.log(clearQuery);
     if (clearQuery) {
       setQuery(clearQuery);
-      setSearchParams({ params: clearQuery });
-      console.log(searchParams);
+      // setSearchParams({ params: clearQuery });
+      // console.log(searchParams);
     }
     //  event.target.reset();
   };
 
   useEffect(() => {
-    const queryParam = searchParams.get('params');
-    if (queryParam) {
-      // setQuery(queryParam);
-      console.log(searchParams);
-    }
+    //  const queryParam = searchParams.get('params');
+    //  if (queryParam) {
+    //    // setQuery(queryParam);
+    //    console.log(searchParams);
+    //  }
 
-    const getMovieSearch = async queryParam => {
-      if (!queryParam || queryParam.trim() === '') return;
+    const getMovieSearch = async () => {
+      if (query === '') return;
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${myApiKey}`;
-        const res = await getMovieByRequest(queryParam);
+        const res = await getMovieByRequest(query);
         setData(res);
         console.log(res);
       } catch (error) {
@@ -41,7 +41,7 @@ export default function MoviesPage() {
       }
     };
     getMovieSearch();
-  }, [searchParams]);
+  }, [query]);
 
   return (
     <div>
