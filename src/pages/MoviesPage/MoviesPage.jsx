@@ -6,7 +6,7 @@ import MovieList from '../../components/MovieList/MovieList';
 import axios from 'axios';
 
 export default function MoviesPage() {
-  const [query, setQuery] = useState('');
+  //   const [query, setQuery] = useState('');
   const [data, setData] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -14,10 +14,10 @@ export default function MoviesPage() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const clearQuery = event.target.elements.query.value.trim(); // Виправлено доступ до елементу форми
+    const clearQuery = event.target.elements.query.value.trim();
     console.log(clearQuery);
     if (clearQuery) {
-      setQuery(clearQuery);
+      // setQuery(clearQuery);
       setSearchParams({ query: clearQuery });
     }
     event.target.reset();
@@ -35,13 +35,13 @@ export default function MoviesPage() {
         console.log(res);
         console.log(queryParam);
       } catch (error) {
-        console.log(
+        toast.error(
           `Sorry bro, we didn't find anything matching your request: ${error}`
         );
       }
     };
     getMovieSearch();
-  }, [query, searchParams]);
+  }, [searchParams]);
 
   return (
     <div>
@@ -51,6 +51,7 @@ export default function MoviesPage() {
         <button type="submit">Search</button>
       </form>
       {data.length > 0 && <MovieList movies={data} />}
+      <Toaster />
     </div>
   );
 }
